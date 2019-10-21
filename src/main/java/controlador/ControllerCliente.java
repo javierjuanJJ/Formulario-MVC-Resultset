@@ -36,9 +36,9 @@ public class ControllerCliente implements Initializable {
     @FXML
     private Button btnNuevo;
     @FXML
-    private Button btnBorrar;
+    private Button btnBorrarOAceptar;
     @FXML
-    private Button btnEditar;
+    private Button btnEditarOCancelar;
     @FXML
     private TextField tfID;
     @FXML
@@ -255,8 +255,8 @@ public class ControllerCliente implements Initializable {
         switch (modo) {
             case MODO_NAVEGACION:
                 btnNuevo.setDisable(false);
-                btnBorrar.setText("Borrar");
-                btnEditar.setText("Editar");
+                btnBorrarOAceptar.setText("Borrar");
+                btnEditarOCancelar.setText("Editar");
                 tfNombre.setEditable(false);
                 tfDireccion.setEditable(false);
                 break;
@@ -266,8 +266,8 @@ public class ControllerCliente implements Initializable {
                 tfDireccion.setText("");
             case MODO_EDITA_REGISTRO:
                 btnNuevo.setDisable(true);
-                btnBorrar.setText("Aceptar");
-                btnEditar.setText("Cancelar");
+                btnBorrarOAceptar.setText("Aceptar");
+                btnEditarOCancelar.setText("Cancelar");
                 tfNombre.setEditable(true);
                 tfDireccion.setEditable(true);
                 tfNombre.requestFocus();
