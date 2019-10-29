@@ -50,14 +50,14 @@ public class ControllerCliente implements Initializable {
 
 		try {
 			operacionesBD = new OperacionesBD(Cliente.class);
-			
+
 			if (OperacionesBD.getCon() == null) {
 				Platform.exit();
 			}
-			
+
 			cli = (Cliente) operacionesBD.primero();
 		} catch (Exception e) {
-			e.printStackTrace();
+			mensajeExcepcion(e, "Error en el inicio");
 		}
 		mostrarRegistro();
 
@@ -71,8 +71,7 @@ public class ControllerCliente implements Initializable {
 		try {
 			cli = (Cliente) operacionesBD.primero();
 		} catch (SQLException e) {
-
-			e.printStackTrace();
+			mensajeExcepcion(e, "Ir hacia el primero");
 		}
 		mostrarRegistro();
 	}
@@ -81,12 +80,9 @@ public class ControllerCliente implements Initializable {
 	private void accionAtras() {
 
 		try {
-			if (!operacionesBD.esPrimero()) {
-				operacionesBD.ir(operacionesBD.registroActual() - 1);
-				cli = (Cliente) operacionesBD.leer();
-			}
+			cli = (Cliente) operacionesBD.anterior();
 		} catch (Exception e) {
-			e.printStackTrace();
+			mensajeExcepcion(e, "Ir hacia atras");
 		}
 
 		mostrarRegistro();
@@ -96,12 +92,9 @@ public class ControllerCliente implements Initializable {
 	private void accionAdelante() {
 
 		try {
-			if (!operacionesBD.esUltimo()) {
-				operacionesBD.ir(operacionesBD.registroActual() + 1);
-				cli = (Cliente) operacionesBD.leer();
-			}
+			cli = (Cliente) operacionesBD.siguiente();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			mensajeExcepcion(e, "Ir hacia delante");
 		}
 		mostrarRegistro();
 	}
@@ -113,7 +106,7 @@ public class ControllerCliente implements Initializable {
 			cli = (Cliente) operacionesBD.ultimo();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			mensajeExcepcion(e, "Ir hacia el ultimo");
 		}
 
 		mostrarRegistro();
@@ -177,7 +170,7 @@ public class ControllerCliente implements Initializable {
 		try {
 			lblInfo.setText("Registro " + operacionesBD.registroActual() + " de " + operacionesBD.numRegistros());
 		} catch (SQLException ex) {
-			System.err.println("error");
+			mensajeExcepcion(ex, "Mostrando registro");
 		}
 		tfID.setText(String.valueOf(cli.getId()));
 		tfNombre.setText(cli.getNombre());
