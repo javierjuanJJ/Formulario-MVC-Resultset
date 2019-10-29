@@ -23,7 +23,12 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public int getId() {
+    public Cliente(String nombre, String direccion) {
+    	this.nombre = nombre;
+        this.direccion = direccion;
+	}
+
+	public int getId() {
         return id;
     }
 
